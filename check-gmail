@@ -1,0 +1,22 @@
+#!/bin/bash
+ 
+count=$(curl -u yourusername@gmail.com:yoursupersecretpassword --silent "https://mail.google.com/mail/feed/atom" | awk -F "fullcount" '{ print $2 }' | sed 's/[></]//g')
+ 
+if [[ $count -gt 0 ]]
+then
+	if [[ $count > 1 ]]
+	then
+		if [[ $count > 5 ]]
+		then
+			echo "**$count unread emails**"
+		else
+			echo "$count unread emails"
+		fi
+	else
+		echo "$count unread email"
+	fi
+else
+	echo "No unread emails"
+fi
+
+echo $normal
