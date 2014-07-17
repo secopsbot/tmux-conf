@@ -1,0 +1,24 @@
+#!/bin/bash
+
+status=$(pmset -g batt | cut -f 1 -d ";" | tail -c 4 | cut -f 1 -d "%")
+med=40
+crit=25
+
+fgcolour="#[fg=green]"
+
+if [[ $status -le $med ]]
+then
+	fgcolour="#[fg=yellow]"
+fi
+
+if [[ $status -le $crit ]]
+then
+	fgcolour="#[fg=red]"
+fi
+
+if [[ $status -ge 95 ]]
+then
+	echo "[-]"
+else
+	echo "Batt:"$fgcolour$status"%"
+fi

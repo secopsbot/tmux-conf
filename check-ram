@@ -1,0 +1,18 @@
+#!/bin/bash
+
+med=59
+crit=40
+usage=$(memory_pressure | grep percentage | cut -f 5 -d " " | cut -f 1 -d "%")
+fgcolour="#[fg=green]"
+
+if [[ $usage -le $med ]]
+then
+	fgcolour="#[fg=yellow]"
+fi
+
+if [[ $usage -le $crit ]]
+then
+	fgcolour="#[fg=red]"
+fi
+
+echo "Ram Free:"$fgcolour$usage"%"
